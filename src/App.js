@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import FormInput from "./components/Form";
+import List from "./components/List";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Col, Container, Row } from "react-bootstrap";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+    };
+  }
+
+  onSubmit = (dataForm) => {
+    this.setState({
+      data: this.state.data.concat(dataForm),
+    });
+  };
+
+  render() {
+    return (
+      <Container className="py-5">
+        <Row>
+          <Col md="12">
+            <FormInput onSubmit={this.onSubmit} />
+          </Col>
+          <Col md="12" className="pt-5">
+            <List data={this.state.data} />
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
 }
 
 export default App;
